@@ -32,7 +32,6 @@ type Companion struct {
     Name    string `json:"name"`
     Weapon  string `json:"weapon"`
 }
-
 // End Global Structures ------------------------------------------------------------
 
 
@@ -56,7 +55,7 @@ func DisplayMainMenu() string {
 	fmt.Println("    5. Display All User's Frames")
 	fmt.Println("")
 	fmt.Println("   10. Read-in Json Data, ready for data manipulation")
-	fmt.Println("   11. Add User into JsonData")
+	fmt.Println("   11. Add User into JsonData (noSpaces, use '_')")
 	fmt.Println("   15. Save all in-memory data to json datafile")
 	fmt.Println("")
 	fmt.Println("   99. Exit Menu")
@@ -90,7 +89,6 @@ func WriteOutFile(sentinUsers Users) {
 	_ = ioutil.WriteFile(file2readIn, file, 0644)
 	fmt.Println("\n" + file2readIn + " was updated successfully, Press the Enter Key to Continue\n")
 	fmt.Scanln()
-
 }
 
 // display all data within that file
@@ -151,6 +149,9 @@ func EnterNewUser(sentinUsers Users) Users {
 
 	var newGamerTag string
 	var sentinal int = 0
+	var newUser User 
+	var stdUserinput string
+
 
 	fmt.Printf("\nEnter new Gamertag: ")
 	fmt.Scan(&newGamerTag)
@@ -166,6 +167,35 @@ func EnterNewUser(sentinUsers Users) Users {
 	// If not in dataset continue on with user input
 	if (sentinal == 0) {
 
+		// Brute force all the questions for the new record
+		newUser.Gamertag = newGamerTag
+
+		fmt.Printf("\n" + newGamerTag + "'s warframe is called: ")
+		fmt.Scan(&stdUserinput)
+		newUser.Warframe = stdUserinput
+
+		fmt.Printf("\n" + newGamerTag + "'s Primary weapon is: ")
+		fmt.Scan(&stdUserinput)
+		newUser.Primary = stdUserinput
+
+		fmt.Printf("\n" + newGamerTag + "'s Secondary weapon is: ")
+		fmt.Scan(&stdUserinput)
+		newUser.Secondary = stdUserinput
+
+		fmt.Printf("\n" + newGamerTag + "'s Melee weapon is: ")
+		fmt.Scan(&stdUserinput)
+		newUser.Melee = stdUserinput
+
+		fmt.Printf("\n" + newGamerTag + "'s Companion is: ")
+		fmt.Scan(&stdUserinput)
+		newUser.Companion.Name = stdUserinput
+
+		fmt.Printf("\n" + newGamerTag + "'s Companion " + stdUserinput + " is assigned a weapon called: ")
+		fmt.Scan(&stdUserinput)
+		newUser.Companion.Weapon = stdUserinput
+
+		// Apprend the new record to exiting array and return
+		sentinUsers.Users = append(sentinUsers.Users, newUser)		
 	} else {
 		fmt.Println("\n\nGamertag: " + newGamerTag + " ALREADY exists in the warframe datafile... Returning to main menu...")
 		time.Sleep(2 * time.Second)
@@ -234,5 +264,4 @@ func main(){
 			clearScreen()
 		}
 	}
-
 }

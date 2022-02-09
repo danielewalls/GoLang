@@ -21,6 +21,17 @@
     "name": "kurburos",
     "weapon": "aa"
    }
+  },
+  {
+   "gamertag": "mcwilly",
+   "warframe": "Oberon",
+   "primary": "Lex_Prime",
+   "secondary": "twin_gragatas",
+   "melee": "vesion",
+   "companion": {
+    "name": "shade",
+    "weapon": "deconstructor"
+   }
   }
  ]
 }
