@@ -190,23 +190,23 @@ func main(){
 		SelectedItem = DisplayMainMenu()
 
 		switch SelectedItem {
-		case "1":
+		case "1": // Display single user
 			DisplaySingleUser()
 			fmt.Println("\nPress the Enter Key to Continue\n")
 			fmt.Scanln()
 
-		case "5":
+		case "5": // Display all users
 			DisplayAllData()
 			fmt.Println("\nPress the Enter Key to Continue\n")
 			fmt.Scanln()
 
-		case "10":
+		case "10":  //Read in raw data file into memory
 			clearScreen()
 			allusers = ReadinFile()
 			fmt.Println("\n\nAll data successfully read, all set for data manipulation....returning to main menu")
 			time.Sleep(2 * time.Second)
 
-		case "11":
+		case "11": // Add new user to the array
 			if (len(allusers.Users) > 0) {
 				allusers = EnterNewUser(allusers)
 			} else {
@@ -214,11 +214,8 @@ func main(){
 				time.Sleep(3 * time.Second)
 			}
 			clearScreen()
-			// fmt.Printf("\n%v is not implemented yet......", SelectedItem)
-			// time.Sleep(1 * time.Second)
-			// clearScreen()
 
-		case "15":
+		case "15": // write out data to the file
 			if (len(allusers.Users) > 0) {
 				WriteOutFile(allusers)
 			} else {
@@ -227,11 +224,11 @@ func main(){
 			}
 			clearScreen()
 			
-		case "99":
+		case "99":  //exit the kiosk
 			fmt.Println("\n")
 			os.Exit(0) 
 
-		default:
+		default:  //throw up warning if switch falls through
 			fmt.Printf("\n%v is NOT valid!!!", SelectedItem)
 			time.Sleep(1 * time.Second)
 			clearScreen()
