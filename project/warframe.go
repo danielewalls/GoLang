@@ -8,14 +8,15 @@ import (
 )
 
 
+// Clears screen with no return
 func clearScreen() {
 
-	// Clear Screen before menu
 	clrScreen := exec.Command("clear")
 	clrScreen.Stdout = os.Stdout
 	clrScreen.Run()
 }
 
+// Displays main menu and returns user input for validation and processing
 func DisplayMainMenu() string {
 
 	var menuChoice string
@@ -35,11 +36,12 @@ func DisplayMainMenu() string {
 	return menuChoice
 }
 
+// Read in json file and display all data within that file - no return for now
 func DisplayAllData() {
 
 }
 
-
+// Main kiosk processing loop
 func main(){
 
 	var SelectedItem string
