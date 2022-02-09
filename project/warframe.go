@@ -6,7 +6,8 @@ import (
 	"os/exec"
 	"time"
 	"encoding/json"
-    "io/ioutil"
+	"io/ioutil"
+	"strings"
 )
 
 // Begin Global Structures ------------------------------------------------------------
@@ -61,12 +62,10 @@ func DisplayMainMenu() string {
 	return menuChoice
 }
 
-// End Functions ------------------------------------------------------------
+//REad in file and return the list of users
+func ReadinFile() Users {
 
-// Read in json file and display all data within that file - no return for now
-func DisplayAllData() {
-
-	var users Users
+	var warframeUsers Users
 
 	jsonFile, err := os.Open("wf_data.json")
 	if err != nil { 
@@ -76,11 +75,19 @@ func DisplayAllData() {
 	defer jsonFile.Close()
 
 	byteValue, _ := ioutil.ReadAll(jsonFile)
-	json.Unmarshal(byteValue, &users)
+	json.Unmarshal(byteValue, &warframeUsers)
+	return warframeUsers
+}
 
-	// Display all the data in the file
+// display all data within that file
+func DisplayAllData() {
+
+	var users Users
+
+	users = ReadinFile()
 	for i := 0; i < len(users.Users); i++ {
 
+		// Module needed here if have time for color
 		// yellow := color.New(FgYellow).SprintFunc()
 		// red := color.New(FgRed).SprintFunc()
 		// fmt.Printf("this is a %s and this is %s.\n", yellow("warning"), red("error"))
@@ -94,7 +101,32 @@ func DisplayAllData() {
 		fmt.Println("   Companion Name:   " + users.Users[i].Companion.Name)
 		fmt.Println("   Companion Weapon: " + users.Users[i].Companion.Weapon)
     }
+}
 
+// Display asked for user if found
+func DisplaySingleUser(){
+
+	var inputGamertag string
+	var users Users
+
+	fmt.Printf("\nEnter full Gamertag (Case Insensitive): ")
+	fmt.Scan(&inputGamertag)
+	clearScreen()
+
+	users = ReadinFile()
+	for i := 0; i < len(users.Users); i++ {
+		if (strings.ToUpper(inputGamertag) == strings.ToUpper(users.Users[i].Gamertag)) {
+			fmt.Println("\n-----------------FOUND----------------------\n")
+			fmt.Println("Gamer: " + users.Users[i].Gamertag)
+			fmt.Println(" Frame:              " + users.Users[i].Warframe)
+			fmt.Println("  Primary Weapon:    " + users.Users[i].Primary)
+			fmt.Println("  Secondary Weapon:  " + users.Users[i].Secondary)
+			fmt.Println("  Melee Weapon:      " + users.Users[i].Melee)
+			fmt.Println("   Companion Name:   " + users.Users[i].Companion.Name)
+			fmt.Println("   Companion Weapon: " + users.Users[i].Companion.Weapon)
+			fmt.Println("\n--------------------------------------------")
+		}
+    }
 }
 // End Functions ------------------------------------------------------------
 
@@ -116,9 +148,9 @@ func main(){
 			fmt.Scanln()
 
 		case "5":
-			fmt.Printf("\n%v is not implemented yet......", SelectedItem)
-			time.Sleep(1 * time.Second)
-			clearScreen()
+			DisplaySingleUser()
+			fmt.Println("\nPress the Enter Key to Continue\n")
+			fmt.Scanln()
 
 		case "10":
 			fmt.Printf("\n%v is not implemented yet......", SelectedItem)
