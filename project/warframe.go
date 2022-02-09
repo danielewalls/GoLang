@@ -53,9 +53,9 @@ func main(){
 
 		switch SelectedItem {
 		case "1":
-			fmt.Printf("\n%v is not implemented yet......", SelectedItem)
-			time.Sleep(1 * time.Second)
-			clearScreen()
+			DisplayAllData()
+			fmt.Println("\nPress the Enter Key to Continue\n")
+			fmt.Scanln()
 
 		case "5":
 			fmt.Printf("\n%v is not implemented yet......", SelectedItem)
