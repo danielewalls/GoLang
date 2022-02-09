@@ -7,7 +7,6 @@ import (
 	"time"
 	"encoding/json"
     "io/ioutil"
-	// "strconv"
 )
 
 // Begin Global Structures ------------------------------------------------------------
@@ -67,20 +66,33 @@ func DisplayMainMenu() string {
 // Read in json file and display all data within that file - no return for now
 func DisplayAllData() {
 
+	var users Users
+
 	jsonFile, err := os.Open("wf_data.json")
 	if err != nil { 
+		fmt.Println("ERROR Opening File:")
 		fmt.Println(err) 
 	}
 	defer jsonFile.Close()
 
 	byteValue, _ := ioutil.ReadAll(jsonFile)
-
-	var users Users
-
 	json.Unmarshal(byteValue, &users)
 
+	// Display all the data in the file
 	for i := 0; i < len(users.Users); i++ {
-        fmt.Println(users.Users[i])
+
+		// yellow := color.New(FgYellow).SprintFunc()
+		// red := color.New(FgRed).SprintFunc()
+		// fmt.Printf("this is a %s and this is %s.\n", yellow("warning"), red("error"))
+
+		fmt.Println("\n--------------------------------------------")
+		fmt.Println("Gamer: " + users.Users[i].Gamertag)
+		fmt.Println(" Frame:              " + users.Users[i].Warframe)
+		fmt.Println("  Primary Weapon:    " + users.Users[i].Primary)
+		fmt.Println("  Secondary Weapon:  " + users.Users[i].Secondary)
+		fmt.Println("  Melee Weapon:      " + users.Users[i].Melee)
+		fmt.Println("   Companion Name:   " + users.Users[i].Companion.Name)
+		fmt.Println("   Companion Weapon: " + users.Users[i].Companion.Weapon)
     }
 
 }
