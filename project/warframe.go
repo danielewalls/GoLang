@@ -47,15 +47,15 @@ func DisplayMainMenu() string {
 
 	var menuChoice string
 
-	fmt.Println("\n\nWelcome to the Warframe User Relay Main Menu")
-	fmt.Println("--------------------------------------------\n")
+	fmt.Println("\n\n  Welcome to the Warframe User Information Kiosk")
+	fmt.Println("--------------------------------------------------\n")
 	fmt.Println("   1. Display a Specific User's Frames")
 	fmt.Println("   5. Display All User's Frames")
 	fmt.Println("\n   10. Add User frame Data")
 	fmt.Println("\n   15. Save all data to JSON file")
 	fmt.Println("")
 	fmt.Println("   99. Exit Menu")
-	fmt.Println("\n--------------------------------------------")
+	fmt.Println("\n--------------------------------------------------")
 
 	fmt.Printf("\nEnter your Choice: ")
 	fmt.Scan(&menuChoice)
@@ -143,12 +143,12 @@ func main(){
 
 		switch SelectedItem {
 		case "1":
-			DisplayAllData()
+			DisplaySingleUser()
 			fmt.Println("\nPress the Enter Key to Continue\n")
 			fmt.Scanln()
 
 		case "5":
-			DisplaySingleUser()
+			DisplayAllData()
 			fmt.Println("\nPress the Enter Key to Continue\n")
 			fmt.Scanln()
 
