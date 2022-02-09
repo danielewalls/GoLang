@@ -10,7 +10,10 @@ import (
 	"strings"
 )
 
-// Begin Global Structures ------------------------------------------------------------
+// Begin Global Structures  and vars ------------------------------------------------------------
+
+var file2readIn string = "wf_data.json"
+
 // Main array of all the warframes Users
 type Users struct {
     Users []User `json:"users"`
@@ -51,8 +54,10 @@ func DisplayMainMenu() string {
 	fmt.Println("--------------------------------------------------\n")
 	fmt.Println("   1. Display a Specific User's Frames")
 	fmt.Println("   5. Display All User's Frames")
-	fmt.Println("\n   10. Add User frame Data")
-	fmt.Println("\n   15. Save all data to JSON file")
+	fmt.Println("\n   10. Readin Json Data, ready for data manipulation")
+	fmt.Println("\n   11. Add User into JsonData")
+
+	fmt.Println("\n   15. Simple Readin Marshal, unmarshal, save to wfSSimpleave.json")
 	fmt.Println("")
 	fmt.Println("   99. Exit Menu")
 	fmt.Println("\n--------------------------------------------------")
@@ -67,7 +72,7 @@ func ReadinFile() Users {
 
 	var warframeUsers Users
 
-	jsonFile, err := os.Open("wf_data.json")
+	jsonFile, err := os.Open(file2readIn)
 	if err != nil { 
 		fmt.Println("ERROR Opening File:")
 		fmt.Println(err) 
@@ -132,6 +137,15 @@ func DisplaySingleUser(){
     }
 	if (sentinal == 0) { fmt.Println("\n\nGamertag: " + inputGamertag + " was not found in the warframe datafile") }
 }
+
+func WriteOutFile(sentinUsers Users) {
+
+	file, _ := json.MarshalIndent(sentinUsers, "", " ")
+	_ = ioutil.WriteFile(file2readIn, file, 0644)
+	fmt.Println("\n" + file2readIn + " was updated successfully, Press the Enter Key to Continue\n")
+	fmt.Scanln()
+
+}
 // End Functions ------------------------------------------------------------
 
 
@@ -139,6 +153,8 @@ func DisplaySingleUser(){
 func main(){
 
 	var SelectedItem string
+	var allusers Users
+
 
 	// Infinite loop for kiosk app main menu
 	for {
@@ -157,13 +173,23 @@ func main(){
 			fmt.Scanln()
 
 		case "10":
+			clearScreen()
+			allusers = ReadinFile()
+			fmt.Println("\n\nAll data successfully read, all set for data manipulation....returning to main menu")
+			time.Sleep(2 * time.Second)
+
+		case "11":
 			fmt.Printf("\n%v is not implemented yet......", SelectedItem)
 			time.Sleep(1 * time.Second)
 			clearScreen()
 
 		case "15":
-			fmt.Printf("\n%v is not implemented yet......", SelectedItem)
-			time.Sleep(1 * time.Second)
+			if (len(allusers.Users) > 0) {
+				WriteOutFile(allusers)
+			} else {
+				fmt.Println("\nERROR: NO DATA found in mememory please select Option 10 to read in data")
+				time.Sleep(3 * time.Second)
+			}
 			clearScreen()
 			
 		case "99":
