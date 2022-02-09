@@ -1,0 +1,26 @@
+{
+    "warframeUsers": [
+      {
+        "gamertag": "etherrabbit",
+        "warframe": "revenant",
+        "Primary": "nataku",
+        "Secondary": "Parvis Prime",
+        "Melee": "Nikana Prime",
+        "Comapnion": {
+            "Name": "Helios Prime",
+            "Weapon": "Deconstructor"
+        }
+      },
+      {
+        "gamertag": "wildcardLuck",
+        "warframe": "Chroma Prime",
+        "Primary": "Kuva Lich",
+        "Secondary": "kuva Jahu",
+        "Melee": "Nikana Prime",
+        "Comapnion": {
+            "Name": "kurburos",
+            "Weapon": ""
+        }
+      }
+    ]
+  }
