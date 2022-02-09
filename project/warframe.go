@@ -52,12 +52,12 @@ func DisplayMainMenu() string {
 
 	fmt.Println("\n\n  Welcome to the Warframe User Information Kiosk")
 	fmt.Println("--------------------------------------------------\n")
-	fmt.Println("   1. Display a Specific User's Frames")
-	fmt.Println("   5. Display All User's Frames")
-	fmt.Println("\n   10. Readin Json Data, ready for data manipulation")
-	fmt.Println("\n   11. Add User into JsonData")
-
-	fmt.Println("\n   15. Simple Readin Marshal, unmarshal, save to wfSSimpleave.json")
+	fmt.Println("    1. Display a Specific User's Frames")
+	fmt.Println("    5. Display All User's Frames")
+	fmt.Println("")
+	fmt.Println("   10. Readin Json Data, ready for data manipulation")
+	fmt.Println("   11. Add User into JsonData")
+	fmt.Println("   15. Save all in-memorydata to json datafile")
 	fmt.Println("")
 	fmt.Println("   99. Exit Menu")
 	fmt.Println("\n--------------------------------------------------")
@@ -187,7 +187,7 @@ func main(){
 			if (len(allusers.Users) > 0) {
 				WriteOutFile(allusers)
 			} else {
-				fmt.Println("\nERROR: NO DATA found in mememory please select Option 10 to read in data")
+				fmt.Println("\nERROR: NO DATA found in memory please select Option 10 to read in data")
 				time.Sleep(3 * time.Second)
 			}
 			clearScreen()
