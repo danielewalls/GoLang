@@ -8,13 +8,12 @@ import (
 )
 
 
-func clearScreen() int {
+func clearScreen() {
 
 	// Clear Screen before menu
 	clrScreen := exec.Command("clear")
 	clrScreen.Stdout = os.Stdout
 	clrScreen.Run()
-	return 0
 }
 
 func DisplayMainMenu() string {
@@ -22,18 +21,22 @@ func DisplayMainMenu() string {
 	var menuChoice string
 
 	fmt.Println("\n\nWelcome to the Warframe User Relay Main Menu")
-	fmt.Println("--------------------------------------------")
-	fmt.Println("1. Display All Current User's Frames")
-	fmt.Println("2. Add User frame Data")
-	fmt.Println("3. Save all data to JSON file")
+	fmt.Println("--------------------------------------------\n")
+	fmt.Println("   1. Display a Specific User's Frames")
+	fmt.Println("   5. Display All User's Frames")
+	fmt.Println("\n   10. Add User frame Data")
+	fmt.Println("\n   15. Save all data to JSON file")
 	fmt.Println("")
-	fmt.Println("9. Exit Menu")
-	fmt.Println("--------------------------------------------")
-	fmt.Println("\n")
+	fmt.Println("   99. Exit Menu")
+	fmt.Println("\n--------------------------------------------")
 
-	fmt.Printf("Enter your Choice: ")
+	fmt.Printf("\nEnter your Choice: ")
 	fmt.Scan(&menuChoice)
 	return menuChoice
+}
+
+func DisplayAllData() {
+
 }
 
 
@@ -43,16 +46,38 @@ func main(){
 
 	// Infinite loop for kiosk app main menu
 	for {
-		_ = clearScreen()
+		clearScreen()
 		SelectedItem = DisplayMainMenu()
+
 		switch SelectedItem {
-		case "9":
+		case "1":
+			fmt.Printf("\n%v is not implemented yet......", SelectedItem)
+			time.Sleep(1 * time.Second)
+			clearScreen()
+
+		case "5":
+			fmt.Printf("\n%v is not implemented yet......", SelectedItem)
+			time.Sleep(1 * time.Second)
+			clearScreen()
+
+		case "10":
+			fmt.Printf("\n%v is not implemented yet......", SelectedItem)
+			time.Sleep(1 * time.Second)
+			clearScreen()
+
+		case "15":
+			fmt.Printf("\n%v is not implemented yet......", SelectedItem)
+			time.Sleep(1 * time.Second)
+			clearScreen()
+			
+		case "99":
 			fmt.Println("\n")
 			os.Exit(0) 
+
 		default:
 			fmt.Printf("\n%v is NOT valid!!!", SelectedItem)
 			time.Sleep(1 * time.Second)
-			_ = clearScreen()
+			clearScreen()
 		}
 	}
 
