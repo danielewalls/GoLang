@@ -1,26 +1,26 @@
 {
-    "warframeUsers": [
-      {
-        "gamertag": "etherrabbit",
-        "warframe": "revenant",
-        "Primary": "nataku",
-        "Secondary": "Parvis Prime",
-        "Melee": "Nikana Prime",
-        "Comapnion": {
-            "Name": "Helios Prime",
-            "Weapon": "Deconstructor"
-        }
-      },
-      {
-        "gamertag": "wildcardLuck",
-        "warframe": "Chroma Prime",
-        "Primary": "Kuva Lich",
-        "Secondary": "kuva Jahu",
-        "Melee": "Nikana Prime",
-        "Comapnion": {
-            "Name": "kurburos",
-            "Weapon": ""
-        }
+  "users": [
+    {
+      "gamertag": "etherrabbit",
+      "warframe": "revenant",
+      "primary": "nataku",
+      "secondary": "Parvis Prime",
+      "melee": "Nikana Prime",
+      "companion": {
+          "name": "Helios Prime",
+          "weapon": "Deconstructor"
       }
-    ]
-  }
+    },
+    {
+      "gamertag": "wildcardLuck",
+      "warframe": "Chroma Prime",
+      "primary": "Kuva Lich",
+      "secondary": "kuva Jahu",
+      "melee": "Nikana Prime",
+      "companion": {
+          "name": "kurburos",
+          "weapon": "aa"
+      }
+    }
+  ]
+}
