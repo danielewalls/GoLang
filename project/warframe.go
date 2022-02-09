@@ -84,6 +84,15 @@ func ReadinFile() Users {
 	return warframeUsers
 }
 
+func WriteOutFile(sentinUsers Users) {
+
+	file, _ := json.MarshalIndent(sentinUsers, "", " ")
+	_ = ioutil.WriteFile(file2readIn, file, 0644)
+	fmt.Println("\n" + file2readIn + " was updated successfully, Press the Enter Key to Continue\n")
+	fmt.Scanln()
+
+}
+
 // display all data within that file
 func DisplayAllData() {
 
@@ -138,12 +147,32 @@ func DisplaySingleUser(){
 	if (sentinal == 0) { fmt.Println("\n\nGamertag: " + inputGamertag + " was not found in the warframe datafile") }
 }
 
-func WriteOutFile(sentinUsers Users) {
+func EnterNewUser(sentinUsers Users) Users {
 
-	file, _ := json.MarshalIndent(sentinUsers, "", " ")
-	_ = ioutil.WriteFile(file2readIn, file, 0644)
-	fmt.Println("\n" + file2readIn + " was updated successfully, Press the Enter Key to Continue\n")
-	fmt.Scanln()
+	var newGamerTag string
+	var sentinal int = 0
+
+	fmt.Printf("\nEnter new Gamertag: ")
+	fmt.Scan(&newGamerTag)
+
+	// Check to see if user already in data set
+	for i := 0; i < len(sentinUsers.Users); i++ {
+		if (strings.ToUpper(newGamerTag) == strings.ToUpper(sentinUsers.Users[i].Gamertag)) { 
+			sentinal = 1 
+			break
+		}
+	}
+
+	// If not in dataset continue on with user input
+	if (sentinal == 0) {
+
+	} else {
+		fmt.Println("\n\nGamertag: " + newGamerTag + " ALREADY exists in the warframe datafile... Returning to main menu...")
+		time.Sleep(2 * time.Second)
+	}
+
+	//regardless of error or new user return the dataset (updated or not)
+	return sentinUsers
 
 }
 // End Functions ------------------------------------------------------------
@@ -154,7 +183,6 @@ func main(){
 
 	var SelectedItem string
 	var allusers Users
-
 
 	// Infinite loop for kiosk app main menu
 	for {
@@ -179,9 +207,16 @@ func main(){
 			time.Sleep(2 * time.Second)
 
 		case "11":
-			fmt.Printf("\n%v is not implemented yet......", SelectedItem)
-			time.Sleep(1 * time.Second)
+			if (len(allusers.Users) > 0) {
+				allusers = EnterNewUser(allusers)
+			} else {
+				fmt.Println("\nERROR: NO DATA found in memory please select Option 10 to read in data")
+				time.Sleep(3 * time.Second)
+			}
 			clearScreen()
+			// fmt.Printf("\n%v is not implemented yet......", SelectedItem)
+			// time.Sleep(1 * time.Second)
+			// clearScreen()
 
 		case "15":
 			if (len(allusers.Users) > 0) {
