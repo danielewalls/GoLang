@@ -84,6 +84,7 @@ func DisplayAllData() {
 
 	var users Users
 
+	clearScreen()
 	users = ReadinFile()
 	for i := 0; i < len(users.Users); i++ {
 
@@ -107,15 +108,17 @@ func DisplayAllData() {
 func DisplaySingleUser(){
 
 	var inputGamertag string
+	var sentinal int = 0
 	var users Users
 
+	clearScreen()
 	fmt.Printf("\nEnter full Gamertag (Case Insensitive): ")
 	fmt.Scan(&inputGamertag)
-	clearScreen()
 
 	users = ReadinFile()
 	for i := 0; i < len(users.Users); i++ {
 		if (strings.ToUpper(inputGamertag) == strings.ToUpper(users.Users[i].Gamertag)) {
+			sentinal = 1
 			fmt.Println("\n-----------------FOUND----------------------\n")
 			fmt.Println("Gamer: " + users.Users[i].Gamertag)
 			fmt.Println(" Frame:              " + users.Users[i].Warframe)
@@ -127,6 +130,7 @@ func DisplaySingleUser(){
 			fmt.Println("\n--------------------------------------------")
 		}
     }
+	if (sentinal == 0) { fmt.Println("\n\nGamertag: " + inputGamertag + " was not found in the warframe datafile") }
 }
 // End Functions ------------------------------------------------------------
 
